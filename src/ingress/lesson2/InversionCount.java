@@ -23,9 +23,4 @@ public class InversionCount {
         return inversionCount;
     }
 
-    public static int findInversionCount2(int[] nums) {
-
-         return 0;
-    }
-
 }

@@ -35,5 +35,4 @@ public class LeftShift {
      return res;
   }
 
-
 }

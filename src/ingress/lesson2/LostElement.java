@@ -1,6 +1,8 @@
 package ingress.lesson2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class LostElement {
 
@@ -21,87 +23,60 @@ public class LostElement {
     return nSum-currentSum;
   }
 
-  public int findDuplicateElement(int[] arr) {
-    // 1,3,4,5,3,6
-     int slow = arr[0];
-     int fast = arr[0];
 
-
-     return 0;
-  }
-
-  public static int[] findLostAndDuplicateElement1(int[] arr, int n) {
-    // find sum of n digits
-
-    //1,3,3,4,5,6
-    //the sum of n -> 1,2,3,4,5,6-> 21
-    // the sum of current array -> 22
-    // duplicated element is 3 and the lost element is 2
-    // lost element = duplicated element - |nsum-arrSum|
-    int nSum = (n*(n+1))/2;
-    //1,2,3,4,1
-
-
-
-    int arrSum = 0;
-    for (int j : arr) {
-      arrSum += j;
-    }
-
-
-
-    return null;
-
-
-  }
-
-
-  //1,2,3,5,5,7 -> 5 is duplicate element and 6 is lost element.
-
-  public static int[] findLostAndDuplicateElement(int[] arr, int n) {
-      int lost = -1;
-      int duplicate = -1;
-      for (int i = 1; i < arr.length; i++) {
-          if (arr[i] - arr[i-1] > 1) {
-              duplicate = arr[i];
-              lost = arr[i] - 1;
+    /**
+       time O(N)
+       memory O(N)
+     */
+  public static List<Integer> findMissingElements(int[] arr, int n) {
+      for (int i = 0; i < n; i++) {
+          int element = arr[i] - 1;
+          if (arr[element] > 0) {
+              arr[element] = -1 * arr[element];
+          }
+      }
+      List<Integer> missed = new ArrayList<>();
+      for(int i = 0; i < n; i++) {
+          if(arr[i] > 0) {
+              missed.add(arr[i]);
           }
       }
 
-      return new int[]{lost, duplicate};
-
-
-//     int first = arr[0];
-//     int last = arr[n-1];
-//     int sum = ((first * last)/2) * n;
-//
-//     return null;
+      return missed;
   }
 
+  public static List<Integer> findMissingElements1(int[] arr, int n) {
+      // first use linear sort
+      for (int i = 0; i < n; i++) {
+          if (arr[i] - 1 != i) {
+              //swap
+              int index = arr[i] - 1;
+              if (arr[index] != arr[i]) {
+                  int temp = arr[i];
+                  arr[i] = arr[index];
+                  arr[index] = temp;
+              }
+          }
+      }
 
+      List<Integer> missed = new ArrayList<>();
+      for (int i = 0; i < n; i++) {
+          if (i + 1 != arr[i]) {
+              missed.add(i + 1);
+          }
+      }
 
+      return missed;
+  }
 
+  public static int[] findLostAndDuplicateElement(int[] arr, int n) {
+      //example
+      // 1,2,3,4,5 it is original array
+      // 1,2,3,3,5 it is given array where 3 is duplicated and 4 is lost element.
+      //the sum
+      int nSum = (n * (n+1))/2; //15
 
-
-  // TODO find it
-//  public static int[] findLostAndDuplicateElement(int[] arr, int n) {
-//    int nSum = (n * (n+1))/2;
-//    System.out.println("nSum - "+nSum);
-//    int currentSum = 0;
-//    for (int j : arr) {
-//      currentSum += j;
-//    }
-//    System.out.println("currentSum - "+currentSum);
-//    int lostElement = currentSum;
-//    for(int i = 1; i <= n; i++ ) {
-//      if (lostElement - i < 0) {
-//         break;
-//      }
-//      lostElement = lostElement - i;
-//    }
-//    System.out.println(lostElement);
-//    int duplicatedElement = currentSum - (nSum - lostElement);
-//    return new int[]{duplicatedElement, lostElement};
-//  }
+      return null;
+  }
 
 }
