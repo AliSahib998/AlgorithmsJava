@@ -1,0 +1,8 @@
+1. inversion count with bubble sort++
+2. left shit n time with different ways++
+3. lost element++
+4. two pointer techniques++
+5. array exercises in the hackerank--
+6. all sorting algorithms--
+
+https://www.hackerrank.com/interview/interview-preparation-kit/arrays/challenges

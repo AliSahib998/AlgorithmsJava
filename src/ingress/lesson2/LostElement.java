@@ -7,10 +7,10 @@ import java.util.List;
 public class LostElement {
 
   public static void main(String[] args) {
-    int[] arr = {1,3,3,4,5,6};
+    int[] arr = {1,3,3,3,5,6};
     //1,4,3,4,5,6
     //System.out.println(findLostElement(arr));
-    System.out.println(Arrays.toString(findLostAndDuplicateElement(arr, 6)));
+    System.out.println(findMissingElements(arr, 6));
   }
 
   public static int findLostElement(int[] arr) {
@@ -28,7 +28,7 @@ public class LostElement {
        time O(N)
        memory O(N)
      */
-  public static List<Integer> findMissingElements(int[] arr, int n) {
+  public static List<Integer> findMissingElements1(int[] arr, int n) {
       for (int i = 0; i < n; i++) {
           int element = arr[i] - 1;
           if (arr[element] > 0) {
@@ -45,11 +45,9 @@ public class LostElement {
       return missed;
   }
 
-  public static List<Integer> findMissingElements1(int[] arr, int n) {
-      // first use linear sort
+  public static List<Integer> findMissingElements(int[] arr, int n) {
       for (int i = 0; i < n; i++) {
           if (arr[i] - 1 != i) {
-              //swap
               int index = arr[i] - 1;
               if (arr[index] != arr[i]) {
                   int temp = arr[i];
@@ -58,7 +56,6 @@ public class LostElement {
               }
           }
       }
-
       List<Integer> missed = new ArrayList<>();
       for (int i = 0; i < n; i++) {
           if (i + 1 != arr[i]) {
